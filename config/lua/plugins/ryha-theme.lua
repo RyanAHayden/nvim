@@ -1,6 +1,7 @@
--- ryha theme (github.com/RyanAHayden/omarchy-ryha-theme), same colors as Ghostty's palette. Only without Omarchy
--- (macOS): Omarchy links its current theme in as plugins/theme.lua and hot-reloads it (omarchy-theme-hotreload.lua).
-if vim.uv.fs_stat(vim.fn.expand("~/.local/share/omarchy")) then
+-- ryha theme (github.com/RyanAHayden/omarchy-ryha-theme), same colors as Ghostty's palette. Only when nothing has
+-- linked a theme in as plugins/theme.lua: Omarchy links its current theme, hypr-mac's theme script (macOS) the one
+-- it set, and both are hot-reloaded (omarchy-theme-hotreload.lua).
+if vim.uv.fs_stat(vim.fn.expand("~/.local/share/omarchy")) or vim.uv.fs_stat(vim.fn.stdpath("config") .. "/lua/plugins/theme.lua") then
   return {}
 end
 

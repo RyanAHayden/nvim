@@ -1,7 +1,9 @@
 return {
 	{
 		name = "theme-hotreload",
-		cond = vim.uv.fs_stat(vim.fn.expand("~/.local/share/omarchy")) ~= nil,
+		-- Omarchy, or hypr-mac's theme script (macOS), which links its theme in as plugins/theme.lua too
+		cond = vim.uv.fs_stat(vim.fn.expand("~/.local/share/omarchy")) ~= nil
+			or vim.uv.fs_stat(vim.fn.stdpath("config") .. "/lua/plugins/theme.lua") ~= nil,
 		dir = vim.fn.stdpath("config"),
 		lazy = false,
 		priority = 1000,
@@ -24,7 +26,8 @@ return {
 						local theme_plugin_name = nil
 						for _, spec in ipairs(theme_spec) do
 							if spec[1] and spec[1] ~= "LazyVim/LazyVim" then
-								theme_plugin_name = spec.name or spec[1]
+								-- lazy's name for it: a spec without name = is known by its repo's basename
+								theme_plugin_name = spec.name or (spec[1]:gsub("%.git$", ""):match("[^/]+$"))
 								break
 							end
 						end
@@ -48,6 +51,13 @@ return {
 									package.loaded[modname] = nil
 									package.preload[modname] = nil
 								end)
+								-- A loaded plugin keeps its first setup() (aether even keeps it in a global), so run its
+								-- config again with the new spec's opts, or going from one aether palette to another changes nothing.
+								-- The reload carries plugin._ over, opts cache included, so drop that first.
+								if plugin._.loaded then
+									plugin._.cache = nil
+									require("lazy.core.loader").config(plugin)
+								end
 							end
 						end
 

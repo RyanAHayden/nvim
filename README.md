@@ -8,6 +8,7 @@ Adding a plugin: create `lua/plugins/<name>.lua` (in `~/nvim/config` or `~/.conf
 
 Theme:
 - with Omarchy (`~/.local/share/omarchy`): Omarchy's current theme (`setup.sh` links it in as `lua/plugins/theme.lua`, gitignored), hot-reloaded when it changes (`omarchy-theme-hotreload.lua`, every theme plugin available via `all-themes.lua`)
-- without (macOS): `ryha-theme.lua`, aether in the [ryha](https://github.com/RyanAHayden/omarchy-ryha-theme) colors
+- macOS: the theme hypr-mac's `theme` script set (Raycast's Switch Theme), linked in as `lua/plugins/theme.lua` and hot-reloaded the same way
+- neither: `ryha-theme.lua`, aether in the [ryha](https://github.com/RyanAHayden/omarchy-ryha-theme) colors
 
 Backgrounds are transparent (`plugin/after/transparency.lua`), so the terminal's shows through.
