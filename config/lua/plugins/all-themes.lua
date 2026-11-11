@@ -7,7 +7,8 @@ return {
 		priority = 1000,
 	},
 	{
-		"bjarneo/aether.nvim",
+		"omacom/aether.nvim", -- moved from bjarneo; name matches Omarchy's theme spec so both share one clone
+		name = "aether",
 		lazy = true,
 		priority = 1000,
 	},

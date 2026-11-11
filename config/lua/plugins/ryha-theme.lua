@@ -8,7 +8,8 @@ end
 return {
   { "LazyVim/LazyVim", opts = { colorscheme = "aether" } },
   {
-    "bjarneo/aether.nvim",
+    "omacom/aether.nvim",
+    name = "aether",
     branch = "v3",
     priority = 1000,
     opts = {
